@@ -32,6 +32,13 @@ function displayData(properties) {
             });
             propertiesBox.appendChild(editButton)
 
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                deleteProperty(properties.id);
+            });
+            propertiesBox.appendChild(deleteButton);
+
             const propertiesName = document.createElement('div');
             propertiesName.classList.add('properties-name');
             propertiesName.textContent = "Name: " + properties.name;
@@ -314,3 +321,26 @@ submitButton.addEventListener('click', (event) => {
 
 }
 
+function deleteProperty(propertyId) {
+    const confirmation = confirm("Are you sure you want to delete this property?");
+    if (!confirmation) {
+        return; // Abort the deletion
+    }
+
+    // Send DELETE request to remove property
+    fetch(apiUrl + '/' + propertyId, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (response.status === 200) {
+            // Remove the property from the allProperties array
+            allProperties = allProperties.filter(prop => prop.id !== propertyId);
+
+            // Update the displayed properties
+            displayData(allProperties);
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting property:', error);
+    });
+}
