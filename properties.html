@@ -6,8 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page with properties</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="./js/properties.js"></script>
+    
+
 </head>
 
 <body>
@@ -29,6 +32,10 @@
 
     <div class="background"></div>
 
+    <div class="propertybox" id="propertyid"></div>
+
+    <button class="create_button" onclick="addProperty()">Add a Property</button>
+
     <script type="text/javascript">
         window.addEventListener("scroll", function(){
             var header = document.querySelector("header");
@@ -36,6 +43,6 @@
         })
     </script>
 
-    <script>src="script.js"</script>
+<script src="./js/script.js"></script>
 </body>
 </html>

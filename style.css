@@ -95,10 +95,11 @@ body {
 .background {
     width: 100%;
     height: 100vh;
-    background: url('background3.jpg') no-repeat;
+    background-image: url(./image/background3.jpg);
     background-size: cover;
     background-position: center;
     filter: blur(10px);
+    z-index: 100;
 }
 
 .container {
@@ -108,11 +109,12 @@ body {
     transform: translate(-50%, -50%);
     width: 75%;
     height: 550px;
-    background: url('background3.jpg') no-repeat;
+    background-image: url(./image/background3.jpg);
     background-size: cover;
     background-position: center;
     border-radius: 10px;
     margin-top: 20px;
+    z-index: 100;
 }
 
 .container .content {
@@ -291,5 +293,79 @@ body {
 
 .login-register p a:hover {
     text-decoration: underline;
+}
+
+.propertybox {
+    display: inline-block; /* Allow background to wrap around content */
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.9); /* Set a background color with some opacity */
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    z-index: 200;
+    position: fixed;
+    top: 200px; /* Adjust this value to control the vertical position */
+    left: 200px; /* Adjust this value to control the horizontal position */
+}
+
+.create_button {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
+    z-index: 200;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background-color: rgba(0, 0, 0, 0.7); /* Adding a background color with some opacity */
+    color: white; /* Set text color to white for better visibility */
+    border: none;
+    cursor: pointer;
+}
+
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px; /* Set a maximum width for the modal */
+    width: 90%; /* Use a percentage for responsiveness */
+}
+
+.property-form {
+    width: 100%;
+    padding: 20px;
+}
+
+.property-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.property-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    color: #777;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 
