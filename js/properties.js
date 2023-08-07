@@ -35,7 +35,7 @@ function displayData(properties) {
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', () => {
-                deleteProperty(properties.id);
+                deleteProperty(properties.id); // Make sure properties.id is the correct property ID
             });
             propertiesBox.appendChild(deleteButton);
 
