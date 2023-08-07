@@ -131,7 +131,37 @@ function openEditModal(property) {
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Save Changes';
     submitButton.addEventListener('click', () => {
-        // ... (rest of the code for updating property)
+        const formData = {};
+        const inputElements = form.querySelectorAll('input');
+        inputElements.forEach(input => {
+            formData[input.previousSibling.textContent.replace(/ /g, '_')] = input.value;
+        });
+    
+        // Send PUT request to update property
+        fetch(apiUrl + '/' + property.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(updatedPropertyData => {
+            // Update the property directly in the allProperties array
+            const updatedIndex = allProperties.findIndex(prop => prop.id === updatedPropertyData.id);
+            if (updatedIndex !== -1) {
+                allProperties[updatedIndex] = updatedPropertyData;
+    
+                // Update the displayed properties
+                displayData(allProperties);
+    
+                modal.remove();
+            }
+        })
+        .catch(error => {
+            console.error('Error updating property:', error);
+            modal.remove();
+        });
     });
 
     form.appendChild(submitButton);
