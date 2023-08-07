@@ -1,0 +1,22 @@
+{
+  "name": "kiran_properties",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitoufo/kiran_properties.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amitoufo/kiran_properties/issues"
+  },
+  "homepage": "https://github.com/amitoufo/kiran_properties#readme",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
