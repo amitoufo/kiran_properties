@@ -21,8 +21,16 @@ function displayData(properties) {
 
     if (properties && properties.length > 0) {
         properties.forEach(properties => {
+
             const propertiesBox = document.createElement('div');
             propertiesBox.classList.add('properties-box');
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+                openEditModal(properties); // Pass the property data to the openEditModal function
+            });
+            propertiesBox.appendChild(editButton)
 
             const propertiesName = document.createElement('div');
             propertiesName.classList.add('properties-name');
@@ -80,6 +88,55 @@ function displayData(properties) {
     } else {
         propertiesDiv.textContent = 'No properties found.';
     }
+}
+
+function openEditModal(property) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    const form = document.createElement('form');
+    form.classList.add('property-form');
+
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button');
+    closeButton.textContent = 'Close';
+    closeButton.addEventListener('click', () => {
+        modal.remove();
+    });
+
+    form.appendChild(closeButton);
+
+    // Order of properties as displayed
+    const propertyKeys = [
+        'name', 'availability', 'rental_price', 'description',
+        'location', 'property_type', 'size', 'no_of_bathroom',
+        'no_of_bedroom', 'amenities'
+    ];
+
+    for (const propertyKey of propertyKeys) {
+        if (propertyKey !== 'id') { // Exclude the 'id' property
+            const label = document.createElement('label');
+            label.textContent = propertyKey.replace(/_/g, ' ');
+
+            const input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('placeholder', property[propertyKey]);
+            input.value = property[propertyKey]; // Set the current value
+
+            form.appendChild(label);
+            form.appendChild(input);
+        }
+    }
+
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Save Changes';
+    submitButton.addEventListener('click', () => {
+        // ... (rest of the code for updating property)
+    });
+
+    form.appendChild(submitButton);
+    modal.appendChild(form);
+    document.body.appendChild(modal);
 }
 
 function addProperty() {
@@ -164,10 +221,10 @@ function addProperty() {
     modal.appendChild(form);
     document.body.appendChild(modal);
     const errorMessage = document.createElement('div');
-errorMessage.classList.add('error-message');
-errorMessage.textContent = 'Please fill in all fields';
-errorMessage.style.color = 'red';
-errorMessage.style.display = 'none'; // Initially hide the error message
+    errorMessage.classList.add('error-message');
+    errorMessage.textContent = 'Please fill in all fields';
+    errorMessage.style.color = 'red';
+    errorMessage.style.display = 'none'; // Initially hide the error message
 
 form.appendChild(errorMessage);
 
