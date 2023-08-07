@@ -301,11 +301,12 @@ body {
     background-color: rgba(255, 255, 255, 0.9); /* Set a background color with some opacity */
     border: 1px solid black;
     padding: 10px;
-    margin: 10px;
+    margin: 20px; /* Increase this value to add more space between property boxes */
     z-index: 200;
     position: fixed;
     top: 200px; /* Adjust this value to control the vertical position */
     left: 200px; /* Adjust this value to control the horizontal position */
+    border-radius: 8px;
 }
 
 .create_button {

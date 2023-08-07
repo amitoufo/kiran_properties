@@ -91,6 +91,8 @@ function displayData(properties) {
             propertiesBox.appendChild(propertiesAmenities);
 
             propertiesDiv.appendChild(propertiesBox);
+
+            propertiesBox.style.marginBottom = '20px';
         });
     } else {
         propertiesDiv.textContent = 'No properties found.';
