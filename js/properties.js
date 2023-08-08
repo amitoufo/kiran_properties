@@ -43,10 +43,6 @@ function displayData(properties) {
             propertiesName.classList.add('properties-name');
             propertiesName.textContent = "Name: " + properties.name;
             
-            const propertiesAvailability = document.createElement('div');
-            propertiesAvailability.classList.add('properties-availability');
-            propertiesAvailability.textContent = 'Availability: ' + properties.availability;
-
             const propertiesPrice = document.createElement('div');
             propertiesPrice.classList.add('properties-price');
             propertiesPrice.textContent = 'Price: ' + properties.rental_price;
@@ -80,7 +76,6 @@ function displayData(properties) {
             propertiesAmenities.textContent = "Amenities: " + properties.amenities;
 
             propertiesBox.appendChild(propertiesName);
-            propertiesBox.appendChild(propertiesAvailability);
             propertiesBox.appendChild(propertiesPrice);
             propertiesBox.appendChild(propertiesDescription);
             propertiesBox.appendChild(propertiesLocation);
@@ -117,7 +112,7 @@ function openEditModal(property) {
 
     // Order of properties as displayed
     const propertyKeys = [
-        'name', 'availability', 'rental_price', 'description',
+        'name', 'rental_price', 'description',
         'location', 'property_type', 'size', 'no_of_bathroom',
         'no_of_bedroom', 'amenities'
     ];
@@ -181,8 +176,7 @@ function openEditModal(property) {
 function addProperty() {
 
     const newProperty = {
-        name: "New Property", // Default values for demonstration
-        availability: true,
+        name: "New Property",
         rental_price: 0,
         description: "Description of the new property",
         location: "Location of the new property",
