@@ -296,6 +296,7 @@ body {
 }
 
 .propertybox {
+    display: grid;
     display: inline-block; /* Allow background to wrap around content */
     width: 500px;
     background-color: rgba(255, 255, 255, 0.9); /* Set a background color with some opacity */
