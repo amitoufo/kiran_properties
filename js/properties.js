@@ -223,8 +223,12 @@ function addProperty() {
 
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Add Property';
-    submitButton.addEventListener('click', () => {
+    submitButton.addEventListener('click', (event) => {
+        event.preventDefault(); 
+
         const formData = {};
+        let allFieldsFilled = true;
+
         const inputElements = form.querySelectorAll('input');
         inputElements.forEach(input => {
             formData[input.previousSibling.textContent.replace(/\s+/g, '_')] = input.value;
@@ -234,7 +238,9 @@ function addProperty() {
         fetch(apiUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': True
             },
             body: JSON.stringify(formData)
         })
