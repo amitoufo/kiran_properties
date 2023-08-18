@@ -8,9 +8,6 @@
     <title>Page with properties</title>
     <link rel="stylesheet" href="./style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="./js/properties.js"></script>
-    
-
 </head>
 
 <body>
@@ -18,9 +15,7 @@
     <header class="header">
         <nav class="navbar">
             <a href="./index.html">Home</a>
-            <a href="">About</a>
             <a href="./properties.html">Properties</a>
-            <a href="">Contact</a>
         </nav>
 
         <form action="#" class="search-bar">
@@ -30,9 +25,16 @@
 
     </header>
 
-    <div class="background"></div>
-
-    <div class="propertybox" id="propertyid"></div>
+    <div class="background">
+        <div class="propertybox" id="propertyid">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
 
     <button class="create_button" onclick="addProperty()">Add a Property</button>
 
@@ -44,5 +46,17 @@
     </script>
 
 <script src="./js/script.js"></script>
+<script src="./js/properties.js"></script>
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"35fc0503ec95518bffe5d48c930e3dd4d","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
 </body>
 </html>

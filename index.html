@@ -10,38 +10,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<!-- <script>
-    // callAPI function that takes the base and exponent numbers as parameters
-    var callAPI = (base,exponent)=>{
-        // instantiate a headers object
-        var myHeaders = new Headers();
-        // add content type header to object
-        myHeaders.append("Content-Type", "application/json");
-        // using built in JSON utility package turn object to string and store in a variable
-        var raw = JSON.stringify({"base":base,"exponent":exponent});
-        // create a JSON object with parameters for API call and store in a variable
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        // make API call with parameters and use promises to get response
-        fetch("https://8ao0o5ibtl.execute-api.ap-southeast-2.amazonaws.com/dev", requestOptions)
-        .then(response => response.text())
-        .then(result => alert(JSON.parse(result).body))
-        .catch(error => console.log('error', error));
-    }
-</script> -->
-
 <body>
     
     <header class="header">
         <nav class="navbar">
             <a href="">Home</a>
-            <a href="">About</a>
             <a href="./properties.html">Properties</a>
-            <a href="">Contact</a>
         </nav>
 
         <form action="#" class="search-bar">
@@ -54,14 +28,10 @@
     <div class="background"></div>
     <div class="container">
         <div class="content">
-            <h2><i class='bx bxl-firebase'></i>Codehal</h2>
+            <h2><i class='bx bxl-firebase'></i>Welcome to</h2>
 
             <div class="text-sci">
-                <h2>Welcome!
-                    <br>
-                    <span>To Our New Website</span></h2>
-
-                <p>This is just a trial website for me to see how it works </p>
+                <h2>PropertyRent</h2>
 
             </div>
         </div>
@@ -135,5 +105,6 @@
     </div>
 
     <script src="./js/script.js"></script>
+    <script src="./js/chat.js"></script>
 </body>
 </html>

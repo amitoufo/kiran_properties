@@ -1,0 +1,150 @@
+import json
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
+import decimal
+
+# Get the service resource.
+dynamodb = boto3.resource('dynamodb')
+
+# Instantiate a table resource object without actually
+# creating a DynamoDB table. Note that the attributes of this table
+# are lazy-loaded: a request is not made nor are the attribute
+# values populated until the attributes
+# on the table resource are accessed or its load() method is called.
+
+table = dynamodb.Table('property_listing')
+
+def decimal_default(obj):
+    if isinstance(obj, decimal.Decimal):
+        return float(obj)
+    elif isinstance(obj, set):  # Handle sets if present in the response data
+        return list(obj)
+    raise TypeError("Object of type {} is not JSON serializable".format(type(obj)))
+
+def getFromDB():
+    response = table.scan()
+    items = response['Items']
+    return items
+
+def saveToDB(property_id, amenities, description, location, no_of_bathroom, no_of_bedroom, property_type, rental_price, size, name):
+    item = {
+            'property_id': property_id,
+            'amenities': amenities,
+            'description': description,
+            'location': location,
+            'no_of_bathroom': no_of_bathroom,
+            'no_of_bedroom': no_of_bedroom,
+            'property_type': property_type,
+            'rental_price': rental_price,
+            'size' : size,
+            'name' : name
+        }
+    table.put_item(
+        Item=item
+    )
+
+def editInDB(property_id, amenities, description, location, no_of_bathroom, no_of_bedroom, property_type, rental_price, size, name):
+    # Step 1: Retrieve the item with the Property ID
+    response = table.get_item(Key={'property_id': property_id})
+    item = response.get('Item')
+
+    # Step 2: Delete the item with the old Property ID
+    if item:
+        
+        item['amenities']= amenities
+        item['description']= description
+        item['location']= location
+        item['no_of_bathroom']= no_of_bathroom
+        item['no_of_bedroom']= no_of_bedroom
+        item['property_type']= property_type
+        item['rental_price']= rental_price
+        item['size']= size
+        item['name']= name
+            
+        table.put_item(Item=item)
+
+        print("Edit successful. Property ID '{}' has been updated.".format(property_id))
+    else:
+        print("Property ID '{}' not found.".format(property_id))
+        
+
+def deleteFromDB(property_id):
+    table.delete_item(
+        Key={
+            'property_id': property_id
+        }
+    )
+
+def lambda_handler(event, context):
+    # Define the headers that will be used for all responses
+    headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',  # This is the CORS header
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, access-control-allow-methods'
+
+    }   
+    
+    try:
+        # Check if the event has the 'httpMethod' key
+        if 'httpMethod' not in event:
+            raise ValueError("Missing 'httpMethod' in the request")
+
+        # Print the event for debugging
+        print(event)
+
+        # Define the list of allowed operations
+        operations = ['GET', 'POST', 'PUT', 'DELETE']
+
+        # Extract the operation from the event
+        operation = event['httpMethod']
+
+        # Check if the operation is allowed
+        if operation not in operations:
+            raise ValueError(f'Unsupported method "{operation}"')
+
+        # If the operation is GET
+        if operation == 'GET':
+            body = getFromDB()
+
+        # If the operation is POST
+        elif operation == 'POST':
+            # Extract data from the body of the request
+            payload = json.loads(event['body'])
+            # Call a function to save data to the DB (this function is not defined here)
+            saveToDB(**payload)
+            body = "Property saved successfully."
+
+        # If the operation is PUT
+        elif operation == 'PUT':
+            # Extract data from the body of the request
+            payload = json.loads(event['body'])
+            # Call a function to save data to the DB (this function is not defined here)
+            saveToDB(**payload)
+            body = "Property updated successfully."
+
+        # If the operation is DELETE
+        elif operation == 'DELETE':
+            # Extract the property_id from the body of the request
+            payload = json.loads(event['body'])
+            property_id = payload['property_id']
+            deleteFromDB(property_id)
+            body = {"message": "Property deleted successfully."}
+
+        # Return a successful response
+        return {
+            'statusCode': '200',
+            'headers': headers,
+            'body': json.dumps(body, default=decimal_default),
+            
+        }
+
+    # If there's any error
+    except Exception as e:
+        # Return an error response
+        return {
+            'statusCode': '400',
+            'headers': headers,
+            'body': str(e),
+            
+        }

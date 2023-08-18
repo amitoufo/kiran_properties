@@ -98,7 +98,6 @@ body {
     background-image: url(./image/background3.jpg);
     background-size: cover;
     background-position: center;
-    filter: blur(10px);
     z-index: 100;
 }
 
@@ -297,14 +296,16 @@ body {
 
 .propertybox {
     display: grid;
-    display: inline-block; /* Allow background to wrap around content */
-    width: 500px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 40px auto 30px auto; /* Increase this value to add more space between property boxes */
     background-color: rgba(255, 255, 255, 0.9); /* Set a background color with some opacity */
     border: 1px solid black;
     padding: 10px;
     margin: 20px; /* Increase this value to add more space between property boxes */
     z-index: 200;
-    position: fixed;
+    position: relative;
     top: 200px; /* Adjust this value to control the vertical position */
     left: 200px; /* Adjust this value to control the horizontal position */
     border-radius: 8px;
@@ -312,13 +313,13 @@ body {
 
 .create_button {
     width: 200px;
-    height: 100px;
+    height: 50px;
     padding: 10px;
     margin: 10px;
     z-index: 200;
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    top: 150px;
+    right: 180px;
     background-color: rgba(0, 0, 0, 0.7); /* Adding a background color with some opacity */
     color: white; /* Set text color to white for better visibility */
     border: none;
@@ -370,4 +371,3 @@ body {
     right: 10px;
     cursor: pointer;
 }
-
